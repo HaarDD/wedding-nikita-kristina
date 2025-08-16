@@ -482,7 +482,7 @@ body {
 
 .invitation-date {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 12vw, 6rem);
+    font-size: clamp(2rem, 12vw, 3.5rem);
     font-weight: 400;
     margin: 10px 0;
     letter-spacing: 4px;
