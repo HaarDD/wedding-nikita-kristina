@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Никита & Кристина - 11.10.2025</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Навбар -->
+    <nav class="navbar" id="navbar">
+        <img src="images/logo-lite.png" alt="Logo" class="nav-logo-lite" id="logoLite">
+        <img src="images/logo-full.png" alt="Logo Full" class="nav-logo-full" id="logoFull">
+        <button class="music-btn" id="musicBtn">♪</button>
+    </nav>
+
+    <main class="container">
+        <!-- Блок 1: Дата и имена (белый фон) -->
+        <section class="section section-light" id="date-and-names-section">
+            <div class="section-content">
+                <!-- Секция 1: Дата -->
+                <div class="date-container">
+                    <div class="date-left">
+                        <div class="date-numbers">
+                            <span class="date-number">11</span>
+                            <span class="date-number">10</span>
+                            <span class="date-number">25</span>
+                        </div>
+                    </div>
+                    <div class="date-divider">
+                    <div class="date-line"></div>
+                </div>
+                    <div class="date-right">
+                        <div class="save-date-text" onclick="addToCalendar()">
+                            <span>сохраните</span>
+                            <span>эту</span>
+                            <div class="last-line">
+                                <span>дату</span>
+                                <div class="click-icon" onclick="addToCalendar()">
+                                    <img src="images/click-icon.png" alt="Click to save date" class="click-icon-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Секция 2: Имена -->
+                <div class="names-container">
+                    <h1 class="main-names">Nikita</h1>
+                    <div class="names-divider">&</div>
+                    <h1 class="main-names">Kristina</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 2: Приглашение (черный фон) -->
+        <section class="section section-dark" id="invitation-section">
+            <div class="section-content">
+                <h2 class="invitation-title">Дорогие друзья!</h2>
+                <p class="invitation-text">Приглашаем Вас на торжество, посвященное нашему бракосочетанию.</p>
+                <div class="invitation-date">11.10.2025</div>
+                <p class="invitation-text">Мы будем рады, если Вы проведете этот счастливый день с нами.</p>
+                <p class="invitation-signature">Никита & Кристина</p>
+            </div>
+        </section>
+
+        <!-- Блок 3: Фото и локация (белый фон) -->
+        <section class="section section-light" id="photo-location-section">
+            <div class="section-content">
+                <!-- Секция 1: Фото -->
+                <div class="photo-container">
+                    <img src="images/wedding-photo.jpg" alt="Nikita и Kristina" class="wedding-photo">
+                </div>
+                
+                <!-- Секция 2: Локация -->
+                <div class="location-content">
+                    <h2 class="section-title">LOCATION</h2>
+                    <p class="location-text">Ждем вас по адресу:</p>
+                    <p class="location-address">г. Пинск, ул. Слободская 8<br>Банкетный зал "Жемчужный"</p>
+                    <div class="map-buttons">
+                        <a href="https://yandex.by/maps/-/CHt7q0LP" target="_blank" class="map-btn">Яндекс Карты</a>
+                        <a href="https://maps.app.goo.gl/CWTMHf9h4tnvggKa9" target="_blank" class="map-btn">Google Maps</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок 4: TIMING (белый фон) -->
+        <section class="section section-light" id="timing-section">
+            <div class="section-content">
+                <h2 class="section-title timing-title">TIMING</h2>
+                
+                <div class="timing-divider"></div>
+                
+                <div class="timing-item">
+                    <div class="timing-time">14:30</div>
+                    <div class="timing-event">Сбор гостей</div>
+                </div>
+                
+                <div class="timing-item">
+                    <div class="timing-time">15:00</div>
+                    <div class="timing-event">Торжество</div>
+                </div>
+                
+                <div class="timing-item">
+                    <div class="timing-time">16:00</div>
+                    <div class="timing-event">Танцы и веселье</div>
+                </div>
+                
+                <div class="timing-item">
+                    <div class="timing-time">22:00</div>
+                    <div class="timing-event">Праздничный салют</div>
+                </div>
+                
+                <div class="timing-divider"></div>
+            </div>
+        </section>
+
+        <!-- Блок 5: RSVP форма (белый фон) -->
+        <section class="section section-light" id="rsvp-section">
+            <div class="section-content">
+                <h2 class="section-title">ПОДТВЕРЖДЕНИЕ ПРИСУТСТВИЯ</h2>
+                <form class="rsvp-form" id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Сможете присутствовать на торжестве?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="yes" required>
+                                <span>Да, буду(ем)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="attendance" value="no" required>
+                                <span>К сожалению, не смогу(ем)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="guestsGroup">
+                        <label for="guests">Количество гостей (включая вас):</label>
+                        <select id="guests" name="guests">
+                            <option value="1">1 человек</option>
+                            <option value="2">2 человека</option>
+                            <option value="3">3 человека</option>
+                            <option value="4">4 человека</option>
+                            <option value="5">5+ человек</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="guestNamesGroup">
+                        <label for="guestNames">Имена сопровождающих:</label>
+                        <textarea id="guestNames" name="guestNames" placeholder="Укажите имена тех, кто будет с вами"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Пожелания или комментарии:</label>
+                        <textarea id="message" name="message" placeholder="Ваши пожелания молодоженам"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">ОТПРАВИТЬ</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <audio id="backgroundMusic" loop>
+        <source src="music/wedding-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

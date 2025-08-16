@@ -1,0 +1,733 @@
+/* Локальные шрифты */
+@font-face {
+    font-family: 'Instrument Serif';
+    src: url('fonts/Instrument_Serif/InstrumentSerif-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('fonts/Playfair_Display/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'Morison Display';
+    src: url('fonts/Morison-Display/morison-displaylight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Myriad VF';
+    src: url('fonts/Myriad VF/Myriad VF Light Condensed.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* Основные стили - черно-белая палитра */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --white: #ffffff;
+    --black: #000000;
+    --gray: #333333;
+    --light-gray: #f5f5f5;
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Playfair Display', serif;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--black);
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100%;
+}
+
+/* Навбар */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-logo-lite {
+    height: 30px;
+    width: auto;
+    transition: all 0.5s ease;
+    opacity: 1;
+}
+
+.nav-logo-full {
+    height: 40px;
+    width: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navbar.scrolled .nav-logo-lite {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navbar.scrolled .nav-logo-full {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.music-btn {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    background: var(--gray);
+    transform: scale(1.1);
+}
+
+.music-btn.playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Основной контейнер */
+.container {
+    padding-top: 70px;
+    width: 100%;
+    max-width: 100vw;
+}
+
+/* Секции */
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    width: 100%;
+}
+
+/* Второй блок - приглашение - меньше по высоте */
+#invitation-section {
+    min-height: 60vh;
+    border-radius: 20px;
+    margin: 0 20px;
+    width: calc(100% - 40px);
+}
+
+/* Третий блок - фото и локация */
+#photo-location-section {
+    min-height: 80vh;
+}
+
+/* Пятый блок - RSVP начинается от верха */
+#rsvp-section {
+    align-items: flex-start;
+}
+
+/* Заголовок блока 5 - маленький размер */
+#rsvp-section .section-title {
+    margin-top: 30px;
+    font-size: 2rem;
+}
+
+.section-light {
+    background: var(--white);
+    color: var(--black);
+}
+
+.section-dark {
+    background: var(--black);
+    color: var(--white);
+}
+
+.section-content {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Убираем анимацию для блока приглашения */
+#invitation-section .section-content {
+    animation: none;
+}
+
+/* Убираем анимацию для блока фото-локации */
+#photo-location-section .section-content {
+    animation: none;
+}
+
+/* Убираем анимацию для блока timing */
+#timing-section .section-content {
+    animation: none;
+}
+
+/* Убираем анимацию для блока RSVP */
+#rsvp-section .section-content {
+    animation: none;
+}
+
+/* Убираем горизонтальную черту под заголовком TIMING */
+#timing-section .section-title {
+    border-bottom: none !important;
+    padding-bottom: 0;
+}
+
+
+/* Блок фото и локации */
+#photo-location-section .section-content {
+    max-width: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.location-content {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Специальная секция для даты и имен */
+#date-and-names-section .section-content {
+    max-width: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Типография */
+.main-title {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+/* Блок даты и имен */
+.date-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto 60px auto;
+    position: relative;
+}
+
+.date-left {
+    flex: 1;
+    text-align: right;
+    padding-right: 0;
+    max-width: 50vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.date-numbers {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 8rem;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+
+.date-number {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    font-weight: 400;
+    line-height: 0.8;
+    letter-spacing: 3px;
+    display: block;
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.8s ease;
+}
+
+.date-number:nth-child(1) {
+    align-self: flex-start;
+}
+
+.date-number:nth-child(2) {
+    align-self: flex-end;
+}
+
+.date-number:nth-child(3) {
+    align-self: flex-start;
+}
+
+.date-number.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.date-divider {
+    width: 2px;
+    height: 300px;
+    margin: 0;
+    display: flex;
+    align-items: flex-end;
+}
+
+.date-line {
+    width: 2px;
+    height: 250px;
+    background: var(--black);
+}
+
+.date-right {
+    flex: 1;
+    text-align: left;
+    padding-left: 0;
+    cursor: pointer;
+    max-width: 50vw;
+    align-self: flex-end;
+}
+
+.save-date-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 28px;
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+}
+
+.save-date-text:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
+.last-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.click-icon {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.click-icon-img {
+    width: 32px;
+    height: 32px;
+    animation: bounce 2s infinite;
+    transition: all 0.3s ease;
+}
+
+.click-icon:hover .click-icon-img {
+    transform: scale(1.2);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+/* Контейнер имен */
+.names-container {
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 100%;
+}
+
+/* Главные имена */
+.main-names {
+    height: 5rem;
+    font-family: 'Morison Display', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    margin: 10px 0;
+    text-transform: uppercase;
+    -webkit-text-stroke: 0.5px currentColor;
+    text-shadow: 0 0 1px currentColor;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-names.animate {
+    opacity: 1;
+}
+
+.names-divider {
+    height: 5rem;
+    font-family: 'Morison Display', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    margin: 15px 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.names-divider.animate {
+    opacity: 0.8;
+}
+
+/* Приглашение */
+.invitation-title {
+    font-family: 'Myriad VF', sans-serif;
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.invitation-text {
+    font-family: 'Myriad VF', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 20px 0;
+    opacity: 0.9;
+}
+
+.invitation-date {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    font-weight: 400;
+    margin: 40px 0;
+    letter-spacing: 4px;
+}
+
+.invitation-signature {
+    font-family: 'Myriad VF', sans-serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-top: 30px;
+    opacity: 0.8;
+}
+
+/* Фото */
+.photo-container {
+    width: 100%;
+    max-width: 80%;
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.wedding-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+    display: block;
+}
+
+/* Состояние когда фото полностью видно */
+.wedding-photo.fully-visible {
+    filter: grayscale(0%);
+}
+
+/* Локация */
+.location-text {
+    font-size: 1.5rem;
+    margin: 20px 0 10px 0;
+    opacity: 0.8;
+}
+
+.location-address {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 20px 0 30px 0;
+    line-height: 1.4;
+}
+
+.map-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.map-btn {
+    background: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+    background: var(--gray);
+    transform: translateY(-2px);
+}
+
+/* Timing */
+.timing-divider {
+    width: 2px;
+    height: 80px;
+    background: var(--black);
+    margin: 10px auto;
+}
+
+.timing-item {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.timing-time {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.timing-event {
+    font-family: 'Myriad VF', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+
+
+/* RSVP форма */
+.rsvp-form {
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--black);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--black);
+    border-radius: 5px;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    background: var(--white);
+    color: var(--black);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--gray);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--gray);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Скрытые элементы формы */
+#guestsGroup,
+#guestNamesGroup {
+    display: none;
+}
+
+#guestsGroup.show,
+#guestNamesGroup.show {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 200px;
+    }
+}
+
+/* Адаптивность для очень маленьких экранов */
+@media (max-width: 360px) {
+    .main-title {
+        font-size: 28px;
+        letter-spacing: 2px;
+    }
+    
+    .names-title {
+        font-size: 32px;
+        letter-spacing: 3px;
+    }
+    
+    .names-divider {
+        font-size: 45px;
+    }
+    
+    .section-title {
+        font-size: 24px;
+    }
+    
+}
+
+/* Анимации появления при скролле */
+.section.animate {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Эффект параллакса для фото */
+.photo-container {
+    transform: translateZ(0);
+    transition: transform 0.3s ease;
+}
+
+.section:nth-child(even) .photo-container {
+    transform: translateY(-10px);
+}
+
+/* Hover эффекты */
+.timing-item:hover .timing-time {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
