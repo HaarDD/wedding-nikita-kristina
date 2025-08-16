@@ -117,8 +117,33 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const formData = new FormData(form);
+            const name = formData.get('name');
+            
+            // Проверяем обязательные поля
+            if (!name || name.trim() === '') {
+                showErrorMessage('Пожалуйста, укажите ваше имя');
+                return;
+            }
+            
+            const attendance = formData.get('attendance');
+            if (!attendance) {
+                showErrorMessage('Пожалуйста, выберите вариант присутствия');
+                return;
+            }
+            
+            // Если выбрано "да" и больше 1 человека, проверяем имена
+            if (attendance === 'yes') {
+                const guests = formData.get('guests') || '1';
+                const guestNames = formData.get('guestNames') || '';
+                
+                if (parseInt(guests) > 1 && (!guestNames || guestNames.trim() === '')) {
+                    showErrorMessage('Пожалуйста, укажите имена сопровождающих');
+                    return;
+                }
+            }
+            
             const data = {
-                name: formData.get('name'),
+                name: name,
                 attendance: formData.get('attendance'),
                 guests: formData.get('guests') || '1',
                 guestNames: formData.get('guestNames') || '',
@@ -186,10 +211,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 3000);
         }
         
-        function showErrorMessage() {
+        function showErrorMessage(message = 'ОШИБКА! ПОПРОБУЙТЕ ЕЩЕ РАЗ') {
             const submitBtn = document.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'ОШИБКА! ПОПРОБУЙТЕ ЕЩЕ РАЗ';
+            submitBtn.textContent = message;
             submitBtn.style.background = '#f44336';
             
             setTimeout(() => {
@@ -405,8 +430,12 @@ document.addEventListener('DOMContentLoaded', function() {
             endTime: "23:00",
             timeZone: "Europe/Minsk",
             location: "г. Пинск, ул. Слободская 8, Банкетный зал \"Жемчужный\"",
-            options: ["Apple", "Google", "iCal", "Outlook.com", "Yahoo"],
-            listStyle: "modal"
+            options: ["Apple", "Google", "iCal"],
+            listStyle: "modal",
+            language: "ru",
+            customLabels: {
+                "close": "Закрыть"
+            }
         };
         
         const button = document.getElementById('calendar-trigger');
