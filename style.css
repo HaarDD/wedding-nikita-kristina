@@ -82,7 +82,7 @@ body {
 }
 
 .nav-logo-full {
-    height: 40px;
+    height: 35px;
     width: auto;
     position: absolute;
     left: 50%;
@@ -588,7 +588,7 @@ body {
 
 .timing-time {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 7vw, 3.5rem);
+    font-size: 3.5rem;
     font-weight: 300;
     letter-spacing: 2px;
     margin-bottom: 10px;
@@ -596,7 +596,7 @@ body {
 
 .timing-event {
     font-family: 'Myriad VF', sans-serif;
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-size: 1.5rem;
     font-weight: 300;
     opacity: 0.8;
 }
