@@ -84,6 +84,7 @@ body {
 .nav-logo-full {
     width: auto;
     max-width: 60%;
+    max-height: 40px;
     position: absolute;
     left: 50%;
     top: 50%;
