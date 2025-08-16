@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollLogo();
     initPhotoColorAnimation();
     initCustomCalendarButton();
-    initScrollArrow();
     
     
     // Музыкальный плеер
@@ -277,14 +276,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     name.classList.add('animate');
                 });
                 divider.classList.add('animate');
-                
-                // Показываем стрелку скролла после появления имен
-                setTimeout(() => {
-                    const scrollArrow = document.getElementById('scrollArrow');
-                    if (scrollArrow) {
-                        scrollArrow.classList.add('visible');
-                    }
-                }, 800); // Задержка после появления имен
             }, 1000); // Раньше и быстрее
         }
         
@@ -445,41 +436,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-    }
-    
-    // Стрелка скролла
-    function initScrollArrow() {
-        const scrollArrow = document.getElementById('scrollArrow');
-        let hasScrolled = false;
-        
-        if (!scrollArrow) return;
-        
-        // Функция для скрытия стрелки
-        function hideArrow() {
-            if (!hasScrolled) {
-                hasScrolled = true;
-                scrollArrow.classList.add('hidden');
-            }
-        }
-        
-        // Слушаем события скролла
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 50) { // Если прокрутили больше 50px
-                hideArrow();
-            }
-        });
-        
-        // Слушаем события тач-жестов для мобильных
-        window.addEventListener('touchmove', hideArrow);
-        
-        // Клик по стрелке - плавный скролл к следующей секции
-        scrollArrow.addEventListener('click', function() {
-            const nextSection = document.getElementById('invitation-section');
-            if (nextSection) {
-                nextSection.scrollIntoView({ behavior: 'smooth' });
-                hideArrow();
-            }
-        });
     }
 });
 
