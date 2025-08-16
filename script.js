@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initScrollLogo();
     initPhotoColorAnimation();
+    initCustomCalendarButton();
+    initScrollArrow();
     
     
     // Музыкальный плеер
@@ -15,8 +17,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const audio = document.getElementById('backgroundMusic');
         let isPlaying = false;
         
-        // Устанавливаем небольшую громкость (20% от максимальной)
+        // Устанавливаем небольшую громкость (10% от максимальной)
         audio.volume = 0.1;
+        
+        // Автоматически запускаем музыку при загрузке страницы
+        setTimeout(() => {
+            audio.play().then(() => {
+                musicBtn.classList.add('playing');
+                musicBtn.textContent = '❚❚';
+                isPlaying = true;
+            }).catch(function(error) {
+                console.log('Автозапуск музыки заблокирован браузером:', error);
+                // Если автозапуск заблокирован, оставляем кнопку для ручного запуска
+            });
+        }, 1000); // Задержка в 1 секунду для лучшей совместимости
         
         musicBtn.addEventListener('click', function() {
             if (isPlaying) {
@@ -55,7 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
             radio.addEventListener('change', function() {
                 if (this.value === 'yes') {
                     guestsGroup.classList.add('show');
-                    guestNamesGroup.classList.add('show');
+                    // Проверяем количество гостей и показываем поле имен только если больше 1
+                    if (guestsSelect.value > 1) {
+                        guestNamesGroup.classList.add('show');
+                    } else {
+                        guestNamesGroup.classList.remove('show');
+                    }
                 } else {
                     guestsGroup.classList.remove('show');
                     guestNamesGroup.classList.remove('show');
@@ -258,6 +277,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     name.classList.add('animate');
                 });
                 divider.classList.add('animate');
+                
+                // Показываем стрелку скролла после появления имен
+                setTimeout(() => {
+                    const scrollArrow = document.getElementById('scrollArrow');
+                    if (scrollArrow) {
+                        scrollArrow.classList.add('visible');
+                    }
+                }, 800); // Задержка после появления имен
             }, 1000); // Раньше и быстрее
         }
         
@@ -376,67 +403,86 @@ document.addEventListener('DOMContentLoaded', function() {
         
         photoObserver.observe(weddingPhoto);
     }
+    
+    // Кастомная кнопка календаря
+    function initCustomCalendarButton() {
+        const config = {
+            name: "Свадьба Никиты и Кристины",
+            description: "Приглашаем вас разделить с нами день свадьбы!",
+            startDate: "2025-10-11",
+            startTime: "15:00",
+            endTime: "23:00",
+            timeZone: "Europe/Minsk",
+            location: "г. Пинск, ул. Слободская 8, Банкетный зал \"Жемчужный\"",
+            options: ["Apple", "Google", "iCal", "Outlook.com", "Yahoo"],
+            listStyle: "modal"
+        };
+        
+        const button = document.getElementById('calendar-trigger');
+        if (button) {
+            button.addEventListener('click', function() {
+                // Добавляем анимацию клика
+                const clickIconImg = button.querySelector('.click-icon-img');
+                const saveText = document.querySelector('.save-date-text');
+                
+                if (clickIconImg) {
+                    clickIconImg.style.animation = 'none';
+                    clickIconImg.style.transform = 'scale(1.3)';
+                }
+                saveText.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    if (clickIconImg) {
+                        clickIconImg.style.animation = 'bounce 2s infinite';
+                        clickIconImg.style.transform = '';
+                    }
+                    saveText.style.transform = '';
+                }, 300);
+                
+                // Вызываем календарь
+                if (typeof atcb_action !== 'undefined') {
+                    atcb_action(config, button);
+                }
+            });
+        }
+    }
+    
+    // Стрелка скролла
+    function initScrollArrow() {
+        const scrollArrow = document.getElementById('scrollArrow');
+        let hasScrolled = false;
+        
+        if (!scrollArrow) return;
+        
+        // Функция для скрытия стрелки
+        function hideArrow() {
+            if (!hasScrolled) {
+                hasScrolled = true;
+                scrollArrow.classList.add('hidden');
+            }
+        }
+        
+        // Слушаем события скролла
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 50) { // Если прокрутили больше 50px
+                hideArrow();
+            }
+        });
+        
+        // Слушаем события тач-жестов для мобильных
+        window.addEventListener('touchmove', hideArrow);
+        
+        // Клик по стрелке - плавный скролл к следующей секции
+        scrollArrow.addEventListener('click', function() {
+            const nextSection = document.getElementById('invitation-section');
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+                hideArrow();
+            }
+        });
+    }
 });
 
-// Глобальная функция для добавления в календарь
-function addToCalendar() {
-    const eventDetails = {
-        title: 'Свадьба Никиты и Кристины',
-        description: 'Приглашаем вас разделить с нами день свадьбы! г. Пинск, ул. Слободская 8, Банкетный зал "Жемчужный"',
-        location: 'г. Пинск, ул. Слободская 8, Банкетный зал "Жемчужный"',
-        start: '2025-10-11T15:00:00',
-        end: '2025-10-11T23:00:00'
-    };
-    
-    // Создаем ics файл для скачивания
-    const icsContent = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//Wedding Invitation//EN',
-        'BEGIN:VEVENT',
-        'UID:wedding-nikita-kristina-2025@wedding.com',
-        `DTSTART:${eventDetails.start.replace(/[-:]/g, '').replace('T', 'T')}`,
-        `DTEND:${eventDetails.end.replace(/[-:]/g, '').replace('T', 'T')}`,
-        `SUMMARY:${eventDetails.title}`,
-        `DESCRIPTION:${eventDetails.description}`,
-        `LOCATION:${eventDetails.location}`,
-        'STATUS:CONFIRMED',
-        'END:VEVENT',
-        'END:VCALENDAR'
-    ].join('\r\n');
-    
-    // Создаем blob и ссылку для скачивания
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = 'wedding-nikita-kristina.ics';
-    
-    // Добавляем анимацию клика
-    const clickIconImg = document.querySelector('.click-icon-img');
-    const saveText = document.querySelector('.save-date-text');
-    
-    if (clickIconImg) {
-        clickIconImg.style.animation = 'none';
-        clickIconImg.style.transform = 'scale(1.3)';
-    }
-    saveText.style.transform = 'scale(1.1)';
-    
-    setTimeout(() => {
-        if (clickIconImg) {
-            clickIconImg.style.animation = 'bounce 2s infinite';
-            clickIconImg.style.transform = '';
-        }
-        saveText.style.transform = '';
-    }, 300);
-    
-    // Запускаем скачивание
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    // Показываем уведомление
-    showNotification('Событие добавлено в календарь!');
-}
 
 // Функция уведомления
 function showNotification(message) {

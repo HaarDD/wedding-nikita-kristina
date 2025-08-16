@@ -2,9 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Никита & Кристина - 11.10.2025</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Никита & Кристина</title>
+    <link rel="icon" type="image/png" href="images/wedding-ring.png">
+    <link rel="apple-touch-icon" href="images/wedding-ring.png">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
+    <script>
+        // Импортируем atcb_action функцию глобально
+        window.addEventListener('load', function() {
+            if (window.atcb_action) {
+                // Функция уже доступна
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- Навбар -->
@@ -31,12 +42,12 @@
                     <div class="date-line"></div>
                 </div>
                     <div class="date-right">
-                        <div class="save-date-text" onclick="addToCalendar()">
+                        <div class="save-date-text" id="calendar-trigger">
                             <span>сохраните</span>
                             <span>эту</span>
                             <div class="last-line">
                                 <span>дату</span>
-                                <div class="click-icon" onclick="addToCalendar()">
+                                <div class="click-icon">
                                     <img src="images/click-icon.png" alt="Click to save date" class="click-icon-img">
                                 </div>
                             </div>
@@ -50,6 +61,10 @@
                     <div class="names-divider">&</div>
                     <h1 class="main-names">Kristina</h1>
                 </div>
+            </div>
+            <!-- Стрелка скролла -->
+            <div class="scroll-arrow" id="scrollArrow">
+                <img src="images/down-arrow.png" alt="Scroll down" class="arrow-down">
             </div>
         </section>
 
@@ -116,7 +131,14 @@
             </div>
         </section>
 
-        <!-- Блок 5: RSVP форма (белый фон) -->
+        <!-- Блок 5: P.S. о подарке (черный фон) -->
+        <section class="section section-dark" id="gift-section">
+            <div class="section-content">
+                <p class="gift-text">P.S. Вместо цветов мы будем рады, если вы подарите бутылочку вашего любимого вина (или другого алкогольного напитка). Мы откроем её на ближайшем совместном празднике и вспомним о вас!</p>
+            </div>
+        </section>
+
+        <!-- Блок 6: RSVP форма (белый фон) -->
         <section class="section section-light" id="rsvp-section">
             <div class="section-content">
                 <h2 class="section-title">ПОДТВЕРЖДЕНИЕ ПРИСУТСТВИЯ</h2>
