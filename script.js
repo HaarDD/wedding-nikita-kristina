@@ -15,35 +15,69 @@ document.addEventListener('DOMContentLoaded', function() {
         const musicBtn = document.getElementById('musicBtn');
         const audio = document.getElementById('backgroundMusic');
         let isPlaying = false;
+        let hasUserInteracted = false;
         
         // Устанавливаем небольшую громкость (10% от максимальной)
         audio.volume = 0.1;
         
-        // Автоматически запускаем музыку при загрузке страницы
-        setTimeout(() => {
+        // Функция попытки автозапуска
+        function tryAutoplay() {
             audio.play().then(() => {
                 musicBtn.classList.add('playing');
                 musicBtn.textContent = '❚❚';
                 isPlaying = true;
+                console.log('Автозапуск музыки успешен');
             }).catch(function(error) {
                 console.log('Автозапуск музыки заблокирован браузером:', error);
-                // Если автозапуск заблокирован, оставляем кнопку для ручного запуска
+                // Показываем визуальную подсказку для включения музыки
+                showMusicHint();
             });
-        }, 1000); // Задержка в 1 секунду для лучшей совместимости
+        }
+        
+        // Показать подсказку о музыке
+        function showMusicHint() {
+            musicBtn.style.animation = 'pulse 2s infinite';
+            musicBtn.title = 'Нажмите для воспроизведения музыки';
+        }
+        
+        // Автоматически запускаем музыку при загрузке страницы
+        setTimeout(tryAutoplay, 1000);
+        
+        // Попытка автозапуска при первом взаимодействии с любым элементом
+        function handleFirstInteraction() {
+            if (!hasUserInteracted && !isPlaying) {
+                hasUserInteracted = true;
+                tryAutoplay();
+                // Убираем обработчики после первого взаимодействия
+                document.removeEventListener('click', handleFirstInteraction);
+                document.removeEventListener('touchstart', handleFirstInteraction);
+                document.removeEventListener('scroll', handleFirstInteraction);
+            }
+        }
+        
+        // Добавляем обработчики для первого взаимодействия
+        document.addEventListener('click', handleFirstInteraction, { passive: true });
+        document.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+        document.addEventListener('scroll', handleFirstInteraction, { passive: true });
         
         musicBtn.addEventListener('click', function() {
+            // Убираем анимацию подсказки при клике
+            musicBtn.style.animation = '';
+            hasUserInteracted = true;
+            
             if (isPlaying) {
                 audio.pause();
                 musicBtn.classList.remove('playing');
                 musicBtn.textContent = '♪';
                 isPlaying = false;
             } else {
-                audio.play().catch(function(error) {
+                audio.play().then(() => {
+                    musicBtn.classList.add('playing');
+                    musicBtn.textContent = '❚❚';
+                    isPlaying = true;
+                }).catch(function(error) {
                     console.log('Ошибка воспроизведения музыки:', error);
                 });
-                musicBtn.classList.add('playing');
-                musicBtn.textContent = '❚❚';
-                isPlaying = true;
             }
         });
         
