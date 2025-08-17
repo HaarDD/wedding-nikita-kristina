@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Создаем observer для отслеживания полной видимости фото
         const photoObserver = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio >= 1.0) {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.7) {
                     // Фото полностью видно - делаем цветным
                     entry.target.classList.add('fully-visible');
                 } else {
