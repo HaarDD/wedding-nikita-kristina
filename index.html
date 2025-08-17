@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -10,13 +11,27 @@
     <script src="dependencies/add-to-calendar-button.js" async defer></script>
     <script>
         // Импортируем atcb_action функцию глобально
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             if (window.atcb_action) {
                 // Функция уже доступна
             }
         });
     </script>
+    <!-- Open Graph метатеги -->
+    <meta property="og:title" content="Свадьба Никиты и Кристины">
+    <meta property="og:description" content="11.10.2025 - Приглашаем вас разделить с нами день свадьбы!">
+    <meta property="og:image" content="https://haardd.github.io/wedding-nikita-kristina/images/wedding-photo.jpg">
+    <meta property="og:url" content="https://haardd.github.io/wedding-nikita-kristina">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Свадьба Никиты и Кристины">
+    <meta name="twitter:description" content="11.10.2025 - Приглашаем вас разделить с нами день свадьбы!">
+    <meta name="twitter:image" content="https://haardd.github.io/wedding-nikita-kristina/images/wedding-photo.jpg">
 </head>
+
 <body>
     <!-- Навбар -->
     <nav class="navbar" id="navbar">
@@ -39,8 +54,8 @@
                         </div>
                     </div>
                     <div class="date-divider">
-                    <div class="date-line"></div>
-                </div>
+                        <div class="date-line"></div>
+                    </div>
                     <div class="date-right">
                         <div class="save-date-text" id="calendar-trigger">
                             <span>сохраните</span>
@@ -54,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Секция 2: Имена -->
                 <div class="names-container">
                     <h1 class="main-names">Nikita</h1>
@@ -82,7 +97,7 @@
                 <div class="photo-container">
                     <img src="images/wedding-photo.jpg" alt="Nikita и Kristina" class="wedding-photo">
                 </div>
-                
+
                 <!-- Секция 2: Локация -->
                 <div class="location-content">
                     <h2 class="section-title">LOCATION</h2>
@@ -90,7 +105,8 @@
                     <p class="location-address">г. Пинск, ул. Слободская 8<br>Банкетный зал "Жемчужный"</p>
                     <div class="map-buttons">
                         <a href="https://yandex.by/maps/-/CHt7q0LP" target="_blank" class="map-btn">Яндекс Карты</a>
-                        <a href="https://maps.app.goo.gl/CWTMHf9h4tnvggKa9" target="_blank" class="map-btn">Google Maps</a>
+                        <a href="https://maps.app.goo.gl/CWTMHf9h4tnvggKa9" target="_blank" class="map-btn">Google
+                            Maps</a>
                     </div>
                 </div>
             </div>
@@ -100,29 +116,24 @@
         <section class="section section-light" id="timing-section">
             <div class="section-content">
                 <h2 class="section-title timing-title">TIMING</h2>
-                
+
                 <div class="timing-divider"></div>
-                
+
                 <div class="timing-item">
                     <div class="timing-time">14:30</div>
                     <div class="timing-event">Сбор гостей</div>
                 </div>
-                
+
                 <div class="timing-item">
                     <div class="timing-time">15:00</div>
                     <div class="timing-event">Торжество</div>
                 </div>
-                
+
                 <div class="timing-item">
                     <div class="timing-time">16:00</div>
                     <div class="timing-event">Танцы и веселье</div>
                 </div>
-                
-                <div class="timing-item">
-                    <div class="timing-time">22:00</div>
-                    <div class="timing-event">Праздничный салют</div>
-                </div>
-                
+
                 <div class="timing-divider"></div>
             </div>
         </section>
@@ -130,7 +141,9 @@
         <!-- Блок 5: P.S. о подарке (черный фон) -->
         <section class="section section-dark" id="gift-section">
             <div class="section-content">
-                <p class="gift-text">P.S. Вместо цветов мы будем рады, если вы подарите бутылочку вашего любимого вина (или другого алкогольного напитка). Мы откроем её на ближайшем совместном празднике и вспомним о вас!</p>
+                <p class="gift-text">P.S. Вместо цветов мы будем рады, если вы подарите бутылочку вашего любимого вина
+                    (или другого алкогольного напитка). Мы откроем её на ближайшем совместном празднике и вспомним о
+                    вас!</p>
             </div>
         </section>
 
@@ -143,7 +156,7 @@
                         <label for="name">Ваше имя:</label>
                         <input type="text" id="name" name="name" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Сможете присутствовать на торжестве?</label>
                         <div class="radio-group">
@@ -157,7 +170,7 @@
                             </label>
                         </div>
                     </div>
-                    
+
                     <div class="form-group" id="guestsGroup">
                         <label for="guests">Количество гостей (включая вас):</label>
                         <select id="guests" name="guests">
@@ -168,17 +181,18 @@
                             <option value="5">5+ человек</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group" id="guestNamesGroup">
                         <label for="guestNames">Имена сопровождающих:</label>
-                        <textarea id="guestNames" name="guestNames" placeholder="Укажите имена тех, кто будет с вами"></textarea>
+                        <textarea id="guestNames" name="guestNames"
+                            placeholder="Укажите имена тех, кто будет с вами"></textarea>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="message">Пожелания или комментарии:</label>
                         <textarea id="message" name="message" placeholder="Ваши пожелания молодоженам"></textarea>
                     </div>
-                    
+
                     <button type="submit" class="submit-btn">ОТПРАВИТЬ</button>
                 </form>
             </div>
@@ -191,4 +205,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

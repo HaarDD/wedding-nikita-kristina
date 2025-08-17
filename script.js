@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, {
-            threshold: 1.0, // Срабатывает только когда элемент видим на 100%
+            threshold: 0.7, // Срабатывает только когда элемент видим на 100%
             rootMargin: '0px'
         });
         
